@@ -5,3 +5,5 @@ class Car:
         self.fuelConsumption = fuelConsumption
         self.regNumber = regNumber
         self.pricePerHour = pricePerHour
+        self.pricePerDay = pricePerHour * 24
+        self.pricePerWeek = pricePerHour * 168
