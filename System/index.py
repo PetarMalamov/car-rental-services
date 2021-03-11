@@ -144,7 +144,6 @@ class System:
     #    TODO: add search transaction by id
 
     def run(self):
-        self.clients.append(Client.from_strings("asd asd 9"))
         while True:
             self.printMainMenu()
             command = input("Enter command: ")
