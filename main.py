@@ -1,9 +1,10 @@
 from Car.index import Car
+import json
+from CarFactory.index import CarFactory
 from Client.index import Client
+# myJsonFile = open('carsList.json', 'r')
+# dataJson = myJsonFile.read()
+from System.index import System
 
 if __name__ == '__main__':
-    Car.printCar()
-    # car1 = Car('1', '2', '3', '4', '5')
-    # print(car1.manufacturer)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    System.run()

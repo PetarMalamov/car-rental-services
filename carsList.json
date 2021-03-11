@@ -1,0 +1,88 @@
+{
+  "cars": [
+    {
+      "manufacturer": "Mercedes",
+      "model": "190 E",
+      "fuelConsumption": 5.5,
+      "regNumber": "E1899MA",
+      "pricePerHour": 20
+    },
+    {
+      "manufacturer": "Mercedes",
+      "model": "250 E",
+      "fuelConsumption": 6,
+      "regNumber": "E2020BA",
+      "pricePerHour": 15
+    },
+    {
+      "manufacturer": "VW",
+      "model": "Golf Mark II",
+      "fuelConsumption": 4,
+      "regNumber": "E2021MM",
+      "pricePerHour": 45
+    },
+    {
+      "manufacturer": "VW",
+      "model": "Passat 5.5",
+      "fuelConsumption": 5.5,
+      "regNumber": "E1899MA",
+      "pricePerHour": 20
+    },
+    {
+      "manufacturer": "Mercedes-AMG F1",
+      "model": "w12",
+      "fuelConsumption": 30,
+      "regNumber": "1",
+      "pricePerHour": 200000
+    },
+    {
+      "manufacturer": "Mercedes",
+      "model": "124",
+      "fuelConsumption": 6.5,
+      "regNumber": "PB0704MA",
+      "pricePerHour": 25
+    },
+    {
+      "manufacturer": "McLaren",
+      "model": "Senna",
+      "fuelConsumption": 6,
+      "regNumber": "PB9999BO",
+      "pricePerHour": 200
+    },
+    {
+      "manufacturer": "Lada",
+      "model": "Niva",
+      "fuelConsumption": 6,
+      "regNumber": "E9929MA",
+      "pricePerHour": 15
+    },
+    {
+      "manufacturer": "Lada",
+      "model": "2107",
+      "fuelConsumption": 5.5,
+      "regNumber": "E0981EK",
+      "pricePerHour": 10
+    },
+    {
+      "manufacturer": "Audi",
+      "model": "A8",
+      "fuelConsumption": 5,
+      "regNumber": "E2189OA",
+      "pricePerHour": 35
+    },
+    {
+      "manufacturer": "Audi",
+      "model": "A4",
+      "fuelConsumption": 5.5,
+      "regNumber": "A9834KB",
+      "pricePerHour": 30
+    },
+    {
+      "manufacturer": "Opel",
+      "model": "Astra",
+      "fuelConsumption": 7,
+      "regNumber": "E6753BM",
+      "pricePerHour": 15
+    }
+  ]
+}
