@@ -109,6 +109,27 @@ class System:
             if transaction["client"] == currentClient.getEgn():
                 print(transaction)
 
+    def getTotalSumOfTransactionsForClient(self):
+        egnFromInput = input("Enter client EGN :")
+        currentClient = next((client for client in self.clients if client.getEgn() == egnFromInput), None)
+
+        if currentClient is None:
+            print("Client with this egn doesn't exist")
+            return
+
+        hasTransactions = any(transaction["client"] == currentClient.getEgn() for transaction in self.transactions)
+
+        if not (hasTransactions):
+            print("This client doesn't have transactions")
+            return
+
+        transactionSum = 0
+        for transaction in self.transactions:
+            if transaction["client"] == currentClient.getEgn():
+                transactionSum+= transaction['totalPrice']
+
+        print(f'The total sum of transactions for the client with egn {currentClient.getEgn()} is {transactionSum}')
+
     def printMainMenu(self):
         print("======Menu======")
         print("Rent a car - 1")
@@ -134,6 +155,7 @@ class System:
                 '1': self.rentCar,
                 "2": self.printTransactions,
                 "3": self.getTransactionsForClient,
+                "4":self.getTotalSumOfTransactionsForClient,
                 '5': self.printCars,
                 '6': self.printAllRentedCars,
                 '7': self.printNotRentedCars
