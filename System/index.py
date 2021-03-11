@@ -47,7 +47,7 @@ class System:
         if currentClient is None:
             print("No client Found")
             print("Please add client to the system")
-            newClient = input("Enter person first name, last name, egn: ")
+            newClient = input("Enter person first name, last name, egn(Example - Petar Malamov 99) : ")
             currentClient = Client.from_strings(newClient)
             self.clients.append(currentClient)
 
@@ -126,7 +126,7 @@ class System:
         transactionSum = 0
         for transaction in self.transactions:
             if transaction["client"] == currentClient.getEgn():
-                transactionSum+= transaction['totalPrice']
+                transactionSum += transaction['totalPrice']
 
         print(f'The total sum of transactions for the client with egn {currentClient.getEgn()} is {transactionSum}')
 
@@ -148,13 +148,14 @@ class System:
             self.printMainMenu()
             command = input("Enter command: ")
             if command == "8":
+                print("Exiting system ... bye :D")
                 break
 
             switch = {
                 '1': self.rentCar,
                 "2": self.printTransactions,
                 "3": self.getTransactionsForClient,
-                "4":self.getTotalSumOfTransactionsForClient,
+                "4": self.getTotalSumOfTransactionsForClient,
                 '5': self.printCars,
                 '6': self.printNotRentedCars,
                 '7': self.printAllRentedCars,
