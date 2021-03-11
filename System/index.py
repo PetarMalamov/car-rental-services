@@ -22,6 +22,10 @@ class System:
         for car in self.cars:
             car.print()
 
+    def printTransactions(self):
+        for transaction in self.transactions:
+            print(transaction)
+
     def printNotRentedCars(self, currentlyChoosenCars=[]):
         for car in self.cars:
             if car.getRentedTo() is None and not (
@@ -65,10 +69,15 @@ class System:
             if addMore == 'No' or addMore == "no":
                 break
 
-        print(carsToRent)
-        for cr in carsToRent:
-            choosenCar = next((car for car in self.cars if car.getRegNumber() == cr['regNumber']), None)
+        totalPrice = 0
+        for carTR in carsToRent:
+            choosenCar = next((car for car in self.cars if car.getRegNumber() == carTR['regNumber']), None)
             choosenCar.setRentedTo(currentClient.getEgn())
+            totalPrice += choosenCar.getPrice(carTR['rentTime'])
+
+        calculatedPrice = totalPrice - totalPrice * 0.3 if len(carsToRent) >= 3 else totalPrice
+        newTransaction = dict(client=currentClient.getEgn(), cars=carsToRent, totalPrice=calculatedPrice)
+        self.transactions.append(newTransaction)
 
     def rentHours(self, time):
         if 'w' in time:
@@ -81,7 +90,7 @@ class System:
     def printMainMenu(self):
         print("======Menu======")
         print("Rent a car - 1")
-        print("Get due amount for client - 2")
+        print("Get transactions - 2")
         print("Get all cars - 3")
         print("Get all free cars - 4")
         print("Get all rented cars - 5")
@@ -97,6 +106,7 @@ class System:
 
             switch = {
                 '1': self.rentCar,
+                "2": self.printTransactions,
                 '3': self.printCars,
                 '4': self.printAllRentedCars,
                 '5': self.printNotRentedCars

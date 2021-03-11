@@ -20,6 +20,9 @@ class Car:
     def getRegNumber(self):
         return self.regNumber
 
+    def getPrice(self,hours):
+        return self.pricePerHour * hours
+
     def print(self):
         isRented = 'rented' if self.rentedTo is not None else 'not rented'
         print(
