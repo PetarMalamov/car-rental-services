@@ -8,9 +8,17 @@ class Car:
         self.pricePerDay = pricePerHour * 24
         self.pricePerWeek = pricePerHour * 168
         self.rentedTo = rentedTo
+        # self.rentedFor = rentedFor
+        # in hours
 
     def setRentedTo(self, egn):
         self.rentedTo = egn
+
+    def getRentedTo(self):
+        return self.rentedTo
+
+    def getRegNumber(self):
+        return self.regNumber
 
     def print(self):
         isRented = 'rented' if self.rentedTo is not None else 'not rented'

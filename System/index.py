@@ -17,21 +17,19 @@ class System:
         print(clientData)
 
     def printCars(self):
-        print("self.cars", self.cars)
         for car in self.cars:
             car.print()
 
-    # def printNotRentedCars(self):
-    #     for car in self.cars:
+    def printNotRentedCars(self, currentlyChoosenCars):
+        print(currentlyChoosenCars)
+        for car in self.cars:
+            if car.getRentedTo() is None and not (
+                    any(chosenCar["regNumber"] == car.getRegNumber() for chosenCar in currentlyChoosenCars)):
+                car.print()
 
     def getClient(self):
         egnFromInput = input("Enter client egn: ")
-        currentClient = None
-        for client in self.clients:
-            if client.getEgn() == egnFromInput:
-                print("here")
-                currentClient = client
-                break
+        currentClient = next((client for client in self.clients if client.getEgn() == egnFromInput), None)
 
         if currentClient is None:
             print("No client Found")
@@ -40,15 +38,35 @@ class System:
             currentClient = Client.from_strings(newClient)
             self.clients.append(currentClient)
 
-        currentClient.print()
         return currentClient
 
     def rentCar(self):
-        self.getClient()
+        currentClient = self.getClient()
+        carsToRent = []
+
+        while True:
+            print("Choose car")
+            self.printNotRentedCars(carsToRent)
+            chosenCar = input("Enter car reg number: ")
+            if any(car.regNumber == chosenCar for car in self.cars):
+                rentTime = input('Enter time (when entering a number end with h/d/w): ')
+                carsToRent.append({"regNumber": chosenCar, "rentTime": rentTime})
+            else:
+                print("No car with that register number found")
+                continue
+
+            addMore = input("Add more cars (Yes/No): ")
+            if addMore == 'No' or addMore == "no":
+                break
+
+        print(carsToRent)
+        for cr in carsToRent:
+            choosenCar = next((car for car in self.cars if car.getRegNumber() == cr['regNumber']), None)
+            choosenCar.setRentedTo(currentClient.getEgn())
+
         # print("asd", client.printClient())
 
-    @staticmethod
-    def printMainMenu():
+    def printMainMenu(self):
         print("======Menu======")
         print("Get all cars - 1")
         print("Rent a car - 2")
