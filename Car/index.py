@@ -20,7 +20,7 @@ class Car:
     def getRegNumber(self):
         return self.regNumber
 
-    def getPrice(self,hours):
+    def getPrice(self, hours):
         return self.pricePerHour * hours
 
     def print(self):

@@ -3,12 +3,15 @@ from Car.index import Car
 from Client.index import Client
 import json
 import re
+import uuid
 
 
 class System:
     cars = []
     clients = []
     transactions = []
+
+    # TODO: make transactions a separate class
 
     def initialiseCarsData(self, jsonPath):
         with open(jsonPath) as carsJson:
@@ -75,8 +78,9 @@ class System:
             choosenCar.setRentedTo(currentClient.getEgn())
             totalPrice += choosenCar.getPrice(carTR['rentTime'])
 
-        calculatedPrice = totalPrice - totalPrice * 0.3 if len(carsToRent) >= 3 else totalPrice
-        newTransaction = dict(client=currentClient.getEgn(), cars=carsToRent, totalPrice=calculatedPrice)
+        calculatedPrice = totalPrice * 0.7 if len(carsToRent) >= 3 else totalPrice
+        newTransaction = dict(id=uuid.uuid1(), client=currentClient.getEgn(), cars=carsToRent,
+                              totalPrice=calculatedPrice)
         self.transactions.append(newTransaction)
 
     def rentHours(self, time):
@@ -87,29 +91,52 @@ class System:
         else:
             return int(re.search(r'\d+', time).group())
 
+    def getTransactionsForClient(self):
+        egnFromInput = input("Enter client EGN :")
+        currentClient = next((client for client in self.clients if client.getEgn() == egnFromInput), None)
+
+        if currentClient is None:
+            print("Client with this egn doesn't exist")
+            return
+
+        hasTransactions = any(transaction["client"] == currentClient.getEgn() for transaction in self.transactions)
+
+        if not (hasTransactions):
+            print("This client doesn't have transactions")
+            return
+
+        for transaction in self.transactions:
+            if transaction["client"] == currentClient.getEgn():
+                print(transaction)
+
     def printMainMenu(self):
         print("======Menu======")
         print("Rent a car - 1")
-        print("Get transactions - 2")
-        print("Get all cars - 3")
-        print("Get all free cars - 4")
-        print("Get all rented cars - 5")
-        print("Exit - 6")
+        print("Get All transactions - 2")
+        print("Get client transactions - 3")
+        print("Get client total due amount - 4")
+        print("Get all cars - 5")
+        print("Get all free cars - 6")
+        print("Get all rented cars - 7")
+        print("Exit - 8")
+
+    #    TODO: add search transaction by id
 
     def run(self):
         self.clients.append(Client.from_strings("asd asd 9"))
         while True:
             self.printMainMenu()
             command = input("Enter command: ")
-            if command == "6":
+            if command == "8":
                 break
 
             switch = {
                 '1': self.rentCar,
                 "2": self.printTransactions,
-                '3': self.printCars,
-                '4': self.printAllRentedCars,
-                '5': self.printNotRentedCars
+                "3": self.getTransactionsForClient,
+                '5': self.printCars,
+                '6': self.printAllRentedCars,
+                '7': self.printNotRentedCars
             }
 
             switch.get(command, lambda: print("Wrong command"))()
