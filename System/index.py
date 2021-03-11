@@ -157,8 +157,8 @@ class System:
                 "3": self.getTransactionsForClient,
                 "4":self.getTotalSumOfTransactionsForClient,
                 '5': self.printCars,
-                '6': self.printAllRentedCars,
-                '7': self.printNotRentedCars
+                '6': self.printNotRentedCars,
+                '7': self.printAllRentedCars,
             }
 
             switch.get(command, lambda: print("Wrong command"))()
