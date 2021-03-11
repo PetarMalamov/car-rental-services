@@ -8,26 +8,26 @@ class System:
     cars = []
     clients = []
 
-    @classmethod
-    def initialiseCarsData(cls, jsonPath):
+    def initialiseCarsData(self, jsonPath):
         with open(jsonPath) as carsJson:
             carsData = json.load(carsJson)
-        cls.cars = CarFactory.getCarList(carsData['cars'])
+        self.cars = CarFactory.getCarList(carsData['cars'])
 
-    @classmethod
-    def createClient(cls, clientData):
+    def createClient(self, clientData):
         print(clientData)
 
-    @classmethod
-    def printCars(cls):
-        for car in cls.cars:
-            car.printCar()
+    def printCars(self):
+        print("self.cars", self.cars)
+        for car in self.cars:
+            car.print()
 
-    @classmethod
-    def getClient(cls):
+    # def printNotRentedCars(self):
+    #     for car in self.cars:
+
+    def getClient(self):
         egnFromInput = input("Enter client egn: ")
         currentClient = None
-        for client in cls.clients:
+        for client in self.clients:
             if client.getEgn() == egnFromInput:
                 print("here")
                 currentClient = client
@@ -38,14 +38,13 @@ class System:
             print("Please add client to the system")
             newClient = input("Enter person first name, last name, egn: ")
             currentClient = Client.from_strings(newClient)
-            cls.clients.append(currentClient)
+            self.clients.append(currentClient)
 
         currentClient.print()
         return currentClient
 
-    @classmethod
-    def rentCar(cls):
-        cls.getClient()
+    def rentCar(self):
+        self.getClient()
         # print("asd", client.printClient())
 
     @staticmethod
@@ -55,19 +54,19 @@ class System:
         print("Rent a car - 2")
         print("Get all free cars - 3")
         print("Get all rented cars - 4")
+        print("Exit - 5")
 
-    @classmethod
-    def run(cls):
-        cls.clients.append(Client.from_strings("asd asd 9"))
+    def run(self):
+        self.clients.append(Client.from_strings("asd asd 9"))
         while True:
-            cls.printMainMenu()
+            self.printMainMenu()
             command = input("Enter command: ")
-            if command == "exit":
+            if command == "5":
                 break
 
             switch = {
-                '1': cls.printCars,
-                '2': cls.rentCar
+                '1': self.printCars,
+                '2': self.rentCar
             }
 
             switch.get(command, lambda: print("Wrong command"))()
